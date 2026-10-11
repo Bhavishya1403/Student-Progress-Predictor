@@ -1,226 +1,82 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Exam Performance</title>
-
-    <style>
-        :root {
-            --navy: #16233d;
-            --navy-deep: #0e1729;
-            --parchment: #f6f1e4;
-            --parchment-dim: #e9e1cc;
-            --brass: #b98a3d;
-            --brass-bright: #d9a746;
-            --ink: #2a2417;
-            --ink-soft: #6b6250;
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-
-        html, body {
-            height: 100%;
-        }
-
-        body {
-            margin: 0;
-            font-family: 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
-            background:
-                radial-gradient(circle at 18% 20%, rgba(217, 167, 70, 0.12), transparent 45%),
-                radial-gradient(circle at 82% 80%, rgba(217, 167, 70, 0.09), transparent 45%),
-                var(--navy-deep);
-            color: var(--parchment);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 32px 20px;
-        }
-
-        .stage {
-            width: 100%;
-            max-width: 640px;
-            text-align: center;
-            opacity: 0;
-            transform: translateY(16px);
-            animation: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        @keyframes rise {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .rule {
-            width: 64px;
-            height: 2px;
-            background: var(--brass);
-            margin: 0 auto 22px;
-        }
-
-        .eyebrow {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            font-size: 11.5px;
-            letter-spacing: 0.24em;
-            text-transform: uppercase;
-            color: var(--brass-bright);
-            margin: 0 0 18px;
-        }
-
-        h1 {
-            font-size: clamp(32px, 5.5vw, 50px);
-            line-height: 1.15;
-            font-weight: 600;
-            margin: 0 0 22px;
-            letter-spacing: 0.005em;
-        }
-
-        h1 em {
-            font-style: normal;
-            color: var(--brass-bright);
-        }
-
-        p.lede {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            font-size: 16px;
-            line-height: 1.65;
-            color: rgba(246, 241, 228, 0.68);
-            max-width: 46ch;
-            margin: 0 auto 40px;
-        }
-
-        .cta {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            font-size: 13.5px;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            font-weight: 600;
-            color: var(--navy-deep);
-            background: linear-gradient(135deg, var(--brass-bright) 0%, var(--brass) 100%);
-            text-decoration: none;
-            border: none;
-            border-radius: 3px;
-            padding: 16px 30px;
-            cursor: pointer;
-            transition: transform 0.15s ease, box-shadow 0.15s ease;
-            box-shadow: 0 14px 30px -12px rgba(217, 167, 70, 0.55);
-        }
-
-        .cta:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 18px 34px -12px rgba(217, 167, 70, 0.65);
-        }
-
-        .cta:active {
-            transform: translateY(0);
-        }
-
-        .cta:focus-visible {
-            outline: 2px solid var(--parchment);
-            outline-offset: 3px;
-        }
-
-        .cta svg {
-            width: 14px;
-            height: 14px;
-            transition: transform 0.15s ease;
-        }
-
-        .cta:hover svg {
-            transform: translateX(3px);
-        }
-
-        .facts {
-            margin-top: 56px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-            text-align: left;
-            border-top: 1px solid rgba(246, 241, 228, 0.14);
-            padding-top: 26px;
-        }
-
-        .facts div {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-        }
-
-        .facts .num {
-            font-family: 'Iowan Old Style', Georgia, serif;
-            font-size: 22px;
-            color: var(--brass-bright);
-            font-variant-numeric: tabular-nums;
-            display: block;
-            margin-bottom: 4px;
-        }
-
-        .facts .label {
-            font-size: 11.5px;
-            letter-spacing: 0.04em;
-            color: rgba(246, 241, 228, 0.55);
-            line-height: 1.4;
-        }
-
-        @media (max-width: 520px) {
-            .facts {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Student Score Lab</title>
+  <style>
+    :root { color-scheme: light; --ink:#142033; --muted:#617086; --line:#dce4ed; --blue:#2457d6; --paper:#f4f7fb; }
+    * { box-sizing:border-box; }
+    body { margin:0; font:16px/1.55 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color:var(--ink); background:var(--paper); }
+    .wrap { width:min(1080px, calc(100% - 36px)); margin:auto; }
+    header { display:flex; justify-content:space-between; align-items:center; padding:24px 0; }
+    .brand { font-weight:750; letter-spacing:-.03em; text-decoration:none; color:var(--ink); }
+    nav { display:flex; gap:20px; } nav a { color:var(--muted); text-decoration:none; font-size:.92rem; }
+    nav a:hover { color:var(--blue); }
+    main { padding:54px 0 70px; }
+    .hero { display:grid; grid-template-columns:1.2fr .8fr; gap:54px; align-items:center; }
+    .eyebrow { color:var(--blue); font-weight:700; text-transform:uppercase; letter-spacing:.12em; font-size:.74rem; }
+    h1 { max-width:700px; margin:.5rem 0 1rem; font-size:clamp(2.4rem, 5vw, 4.4rem); letter-spacing:-.06em; line-height:1.04; }
+    .lede { max-width:640px; color:var(--muted); font-size:1.1rem; }
+    .actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:28px; }
+    .button { display:inline-flex; padding:12px 18px; border:1px solid var(--blue); border-radius:10px; background:var(--blue); color:white; font-weight:700; text-decoration:none; }
+    .button.secondary { background:white; color:var(--blue); }
+    .card { padding:28px; border:1px solid var(--line); border-radius:18px; background:white; box-shadow:0 15px 45px rgba(28,52,87,.06); }
+    .card h2 { margin:0 0 8px; font-size:1.1rem; }
+    .card p { margin:0; color:var(--muted); }
+    .stat { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:22px; }
+    .stat div { padding:15px; border-radius:12px; background:#f3f6fc; }
+    .stat b { display:block; font-size:1.35rem; letter-spacing:-.04em; }
+    .stat span { color:var(--muted); font-size:.78rem; }
+    .status { margin-top:20px; padding:12px 14px; border-radius:10px; font-size:.9rem; }
+    .status.ok { background:#eaf7ef; color:#17603b; }
+    .status.warn { background:#fff5dc; color:#805a0a; }
+    .note { margin-top:24px; padding-left:14px; border-left:3px solid #c7d5f5; color:var(--muted); font-size:.9rem; }
+    footer { padding:24px 0 34px; color:var(--muted); font-size:.82rem; border-top:1px solid var(--line); }
+    @media(max-width:760px) { .hero { grid-template-columns:1fr; gap:28px; } main { padding-top:30px; } header { align-items:flex-start; } nav { gap:12px; } }
+    @media(max-width:460px) { .stat { grid-template-columns:1fr; } nav { flex-direction:column; text-align:right; } }
+  </style>
 </head>
-
 <body>
-
-    <div class="stage">
-        <p class="eyebrow">Academic Assessment Tool</p>
-
-        <h1>Predict a student's <em>mathematics score</em> before the test is even taken</h1>
-
-        <p class="lede">
-            Enter a student's background and their reading and writing scores.
-            The model estimates a mathematics score from patterns learned across
-            comparable student records.
-        </p>
-
-        <a class="cta" href="{{ url_for('predict_datapoint') }}">
-            Predict Maths Score
-            <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.6"
-                      stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-        </a>
-
-        <div class="facts">
-            <div>
-                <span class="num">5</span>
-                <span class="label">Inputs from student background</span>
-            </div>
-            <div>
-                <span class="num">2</span>
-                <span class="label">Prior scores used as signal</span>
-            </div>
-            <div>
-                <span class="num">1</span>
-                <span class="label">Predicted score, out of 100</span>
-            </div>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="{{ url_for('index') }}">Student Score Lab</a>
+      <nav aria-label="Main navigation">
+        <a href="{{ url_for('predict_datapoint') }}">Try a prediction</a>
+        <a href="{{ url_for('evaluation_dashboard') }}">Model evaluation</a>
+      </nav>
+    </header>
+    <main>
+      <section class="hero">
+        <div>
+          <div class="eyebrow">Applied machine learning demonstration</div>
+          <h1>Estimate a student's mathematics score.</h1>
+          <p class="lede">Explore how a regression model combines student background, reading score, and writing score to estimate a math score. The estimate is for demonstration and learning only.</p>
+          <div class="actions">
+            <a class="button" href="{{ url_for('predict_datapoint') }}">Open prediction form <span aria-hidden="true">&nbsp;→</span></a>
+            <a class="button secondary" href="{{ url_for('evaluation_dashboard') }}">See model evaluation</a>
+          </div>
+          <div class="status {{ 'ok' if model_status.available else 'warn' }}" role="status">
+            {% if model_status.available %}
+              Model ready · {{ model_status.model_name }} · version {{ model_status.model_version }}
+            {% else %}
+              {{ model_status.message }}
+            {% endif %}
+          </div>
         </div>
-    </div>
-
+        <aside class="card">
+          <h2>What goes into an estimate?</h2>
+          <p>Five categorical inputs and two score inputs. The model was trained on 1,000 rows in the included student performance dataset.</p>
+          <div class="stat">
+            <div><b>7</b><span>input features</span></div>
+            <div><b>1</b><span>regression target</span></div>
+            <div><b>0–100</b><span>score scale</span></div>
+          </div>
+          <p class="note">The data shows associations, not causes. Do not use this estimate to make educational decisions about an individual student.</p>
+        </aside>
+      </section>
+    </main>
+    <footer>Student Score Lab · Reproducible training and evaluation details are available in the project README.</footer>
+  </div>
 </body>
-
 </html>

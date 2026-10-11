@@ -6,3 +6,4 @@ scikit-learn==1.9.0
 catboost==1.2.10
 xgboost==3.2.0
 dill==0.4.1
+matplotlib>=3.8,<4
